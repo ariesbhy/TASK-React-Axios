@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import Input from "./Input";
+import { createPet } from "../API/pets";
 
 const Modal = ({ show, setShowModal }) => {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [image, setImage] = useState("");
-  const [available, setAvailable] = useState(0);
+  const [adopted, setAdopted] = useState("");
+
+  const handleCreatePet = async () => {
+    const data = {
+      name,
+      image,
+      type,
+      adopted,
+    };
+    const response = await createPet(data);
+    console.log(response);
+  };
   if (!show) return "";
   return (
     <div
@@ -43,7 +55,7 @@ const Modal = ({ show, setShowModal }) => {
         <Input
           name="Pet adopted?"
           onChange={(e) => {
-            setAvailable(e.target.value);
+            setAdopted(e.target.value);
           }}
         />
 

@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import petsData from "../petsData";
-const PetDetail = () => {
-  const pet = petsData[0];
+import { getPetById } from "../API/pets";
+
+const PetDetail = ({ id }) => {
+  const [pet, setPet] = useState({});
+
+  useEffect(() => {
+    const fetchPet = async () => {
+      const data = await getPetById(id);
+      setPet(data);
+    };
+  });
+
   return (
     <div className="bg-[#F9E3BE] w-screen h-[100vh] flex justify-center items-center">
       <div className="border border-black rounded-md w-[70%] h-[70%] overflow-hidden flex flex-col md:flex-row p-5">
